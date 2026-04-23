@@ -39,8 +39,8 @@ export default function Home() {
     <div className="flex flex-col">
       {/* Hero Section */}
       <section className="relative bg-blue-900 text-white py-24 lg:py-32 overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80')] bg-cover bg-center"></div>
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute inset-0 bg-[url('/images/1.png')] bg-cover bg-center"></div>
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl">
@@ -106,8 +106,8 @@ export default function Home() {
           <div className="lg:flex items-center gap-16">
             <div className="lg:w-1/2 mb-12 lg:mb-0">
               <img
-                src="https://images.unsplash.com/photo-1573163281538-506e33a90244?auto=format&fit=crop&q=80"
-                alt="IT Professionals"
+                src="/images/2.png"
+                alt="Oncall IT Support Team"
                 className="rounded-2xl shadow-2xl"
               />
             </div>

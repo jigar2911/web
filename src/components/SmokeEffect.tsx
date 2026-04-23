@@ -4,6 +4,8 @@ import React, { useEffect, useRef } from 'react';
 
 const SmokeEffect: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const isMouseDown = useRef(false);
+  const mousePos = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -13,7 +15,6 @@ const SmokeEffect: React.FC = () => {
     if (!ctx) return;
 
     let particles: Particle[] = [];
-    // More vibrant and colorful smoke colors
     const colors = [
       '#3b82f6', // Blue
       '#ef4444', // Red
@@ -37,19 +38,17 @@ const SmokeEffect: React.FC = () => {
       constructor(x: number, y: number) {
         this.x = x;
         this.y = y;
-        // Start with small size and expand
-        this.size = Math.random() * 5 + 2;
+        this.size = Math.random() * 4 + 1;
         this.color = colors[Math.floor(Math.random() * colors.length)];
-        // Random velocity for "burst" effect
         const angle = Math.random() * Math.PI * 2;
-        const speed = Math.random() * 4 + 1;
+        const speed = Math.random() * 2 + 0.5;
         this.velocity = {
           x: Math.cos(angle) * speed,
           y: Math.sin(angle) * speed
         };
-        this.alpha = 0.8;
-        this.decay = Math.random() * 0.015 + 0.008;
-        this.expansion = Math.random() * 1.5 + 0.5;
+        this.alpha = 0.7;
+        this.decay = Math.random() * 0.01 + 0.005;
+        this.expansion = Math.random() * 1.2 + 0.3;
       }
 
       draw() {
@@ -57,15 +56,10 @@ const SmokeEffect: React.FC = () => {
         ctx.save();
         ctx.globalAlpha = this.alpha;
         ctx.beginPath();
-        // Create a blurry smoke look using shadows or gradients if needed,
-        // but arc is faster for many particles
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fillStyle = this.color;
-
-        // Add a bit of glow
-        ctx.shadowBlur = 15;
+        ctx.shadowBlur = 10;
         ctx.shadowColor = this.color;
-
         ctx.fill();
         ctx.restore();
       }
@@ -75,9 +69,8 @@ const SmokeEffect: React.FC = () => {
         this.y += this.velocity.y;
         this.alpha -= this.decay;
         this.size += this.expansion;
-        // Slow down over time (friction)
-        this.velocity.x *= 0.98;
-        this.velocity.y *= 0.98;
+        this.velocity.x *= 0.99;
+        this.velocity.y *= 0.99;
       }
     }
 
@@ -86,17 +79,32 @@ const SmokeEffect: React.FC = () => {
       canvas.height = window.innerHeight;
     };
 
-    const createSmoke = (e: MouseEvent) => {
-      // More particles for a better effect
-      for (let i = 0; i < 30; i++) {
+    const handleMouseDown = (e: MouseEvent) => {
+      isMouseDown.current = true;
+      mousePos.current = { x: e.clientX, y: e.clientY };
+      // Initial burst
+      for (let i = 0; i < 15; i++) {
         particles.push(new Particle(e.clientX, e.clientY));
       }
     };
 
+    const handleMouseUp = () => {
+      isMouseDown.current = false;
+    };
+
+    const handleMouseMove = (e: MouseEvent) => {
+      mousePos.current = { x: e.clientX, y: e.clientY };
+    };
+
     const animate = () => {
-      // Semi-transparent clear to create a slight trail effect if desired,
-      // but clearRect is cleaner for performance
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Continuous trail if mouse is down
+      if (isMouseDown.current) {
+        for (let i = 0; i < 3; i++) {
+          particles.push(new Particle(mousePos.current.x, mousePos.current.y));
+        }
+      }
 
       particles = particles.filter(p => p.alpha > 0);
       particles.forEach(p => {
@@ -107,14 +115,18 @@ const SmokeEffect: React.FC = () => {
     };
 
     window.addEventListener('resize', resizeCanvas);
-    window.addEventListener('mousedown', createSmoke);
+    window.addEventListener('mousedown', handleMouseDown);
+    window.addEventListener('mouseup', handleMouseUp);
+    window.addEventListener('mousemove', handleMouseMove);
 
     resizeCanvas();
     animate();
 
     return () => {
       window.removeEventListener('resize', resizeCanvas);
-      window.removeEventListener('mousedown', createSmoke);
+      window.removeEventListener('mousedown', handleMouseDown);
+      window.removeEventListener('mouseup', handleMouseUp);
+      window.removeEventListener('mousemove', handleMouseMove);
     };
   }, []);
 

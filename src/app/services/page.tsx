@@ -13,7 +13,7 @@ export default function ServicesPage() {
         "Hardware Life-cycle Management",
         "Regular Health Checks"
       ],
-      image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc51?auto=format&fit=crop&q=80"
+      image: "/images/3.png"
     },
     {
       title: "Cybersecurity",
@@ -26,7 +26,7 @@ export default function ServicesPage() {
         "Security Awareness Training",
         "Firewall Management"
       ],
-      image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80"
+      image: "/images/4.png"
     },
     {
       title: "Cloud Services",
@@ -39,7 +39,7 @@ export default function ServicesPage() {
         "Cloud Security Configuration",
         "Hybrid Cloud Setup"
       ],
-      image: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&q=80"
+      image: "/images/5.jpg"
     },
     {
       title: "Help Desk Support",
@@ -52,7 +52,7 @@ export default function ServicesPage() {
         "Software Installation",
         "User Onboarding"
       ],
-      image: "https://images.unsplash.com/photo-1521791136064-7986c2959210?auto=format&fit=crop&q=80"
+      image: "/images/1.png"
     }
   ];
 

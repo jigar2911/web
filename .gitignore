@@ -15,7 +15,7 @@
 
 # next.js
 /.next/
-# /out/ is explicitly included so the user can download it for hosting
+/out/
 
 # production
 /build
