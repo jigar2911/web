@@ -1,4 +1,4 @@
-import { Users, Target, Award, MapPin } from "lucide-react";
+import { Award, MapPin, Shield } from "lucide-react";
 
 export default function AboutPage() {
   return (
@@ -90,5 +90,3 @@ export default function AboutPage() {
     </div>
   );
 }
-
-import { Shield } from "lucide-react";
