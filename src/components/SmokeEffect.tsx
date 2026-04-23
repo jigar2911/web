@@ -122,7 +122,6 @@ const SmokeEffect: React.FC = () => {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none z-[9999]"
-      style={{ mixBlendMode: 'screen' }}
     />
   );
 };
