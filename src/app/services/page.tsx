@@ -1,4 +1,4 @@
-import { Shield, Cloud, Headset, BarChart, Server, Lock, Check } from "lucide-react";
+import { Shield, Cloud, Headset, Server, Check } from "lucide-react";
 
 export default function ServicesPage() {
   const detailedServices = [
