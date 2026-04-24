@@ -7,9 +7,8 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div className="col-span-1 md:col-span-2">
-            <Link href="/" className="flex flex-col mb-4">
-              <span className="text-2xl font-bold text-white leading-none">ONCALL</span>
-              <span className="text-sm font-semibold tracking-widest text-blue-400">IT SUPPORT</span>
+            <Link href="/" className="inline-block mb-4">
+              <img src="/images/logo.jpg" alt="Oncall IT Support" className="h-20 w-auto brightness-0 invert" />
             </Link>
             <p className="text-gray-400 max-w-md">
               Reliable IT Support and Managed Services for businesses in Christchurch.
@@ -18,7 +17,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h3 className="text-lg font-bold mb-4 text-blue-400">Quick Links</h3>
+            <h3 className="text-lg font-bold mb-4 text-brand-orange">Quick Links</h3>
             <ul className="space-y-2">
               <li><Link href="/" className="text-gray-400 hover:text-white transition-colors">Home</Link></li>
               <li><Link href="/services" className="text-gray-400 hover:text-white transition-colors">Services</Link></li>
@@ -29,18 +28,18 @@ const Footer = () => {
           </div>
 
           <div>
-            <h3 className="text-lg font-bold mb-4 text-blue-400">Contact Us</h3>
+            <h3 className="text-lg font-bold mb-4 text-brand-orange">Contact Us</h3>
             <ul className="space-y-2">
               <li className="flex items-center text-gray-400">
-                <Phone className="w-4 h-4 mr-2 text-blue-400" />
+                <Phone className="w-4 h-4 mr-2 text-brand-orange" />
                 <a href="tel:0277777728" className="hover:text-white transition-colors">027 777 7728</a>
               </li>
               <li className="flex items-center text-gray-400">
-                <Mail className="w-4 h-4 mr-2 text-blue-400" />
+                <Mail className="w-4 h-4 mr-2 text-brand-orange" />
                 <a href="mailto:sales@oncallsupport.co.nz" className="hover:text-white transition-colors">sales@oncallsupport.co.nz</a>
               </li>
               <li className="flex items-center text-gray-400">
-                <MapPin className="w-4 h-4 mr-2 text-blue-400" />
+                <MapPin className="w-4 h-4 mr-2 text-brand-orange" />
                 Christchurch, New Zealand
               </li>
             </ul>

@@ -61,7 +61,7 @@ export default function ServicesPage() {
       {/* Header */}
       <section className="bg-gray-50 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">Our Services</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-brand-blue mb-6">Our Services</h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             We provide a full suite of IT solutions designed to empower your business
             with reliable technology and expert support.
@@ -81,26 +81,28 @@ export default function ServicesPage() {
                 }`}
               >
                 <div className="lg:w-1/2">
-                  <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-2xl mb-6">
-                    <service.icon className="w-8 h-8 text-blue-600" />
+                  <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-50 rounded-2xl mb-6">
+                    <service.icon className="w-8 h-8 text-brand-blue" />
                   </div>
                   <h2 className="text-3xl font-bold text-gray-900 mb-4">{service.title}</h2>
                   <p className="text-lg text-gray-600 mb-8">{service.description}</p>
                   <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {service.features.map((feature, i) => (
                       <li key={i} className="flex items-center text-gray-700">
-                        <Check className="w-5 h-5 text-blue-600 mr-2 flex-shrink-0" />
+                        <Check className="w-5 h-5 text-brand-orange mr-2 flex-shrink-0" />
                         <span>{feature}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
                 <div className="lg:w-1/2">
-                  <img
-                    src={service.image}
-                    alt={service.title}
-                    className="rounded-2xl shadow-xl w-full h-[400px] object-cover"
-                  />
+                  <div className="rounded-2xl shadow-xl overflow-hidden h-[400px]">
+                    <img
+                      src={service.image}
+                      alt={service.title}
+                      className="w-full h-full object-contain object-top bg-gray-50"
+                    />
+                  </div>
                 </div>
               </div>
             ))}

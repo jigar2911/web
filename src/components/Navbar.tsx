@@ -20,9 +20,8 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-20">
           <div className="flex items-center">
-            <Link href="/" className="flex flex-col">
-              <span className="text-2xl font-bold text-blue-700 leading-none">ONCALL</span>
-              <span className="text-sm font-semibold tracking-widest text-gray-600">IT SUPPORT</span>
+            <Link href="/" className="flex items-center">
+              <img src="/images/logo.jpg" alt="Oncall IT Support" className="h-16 w-auto" />
             </Link>
           </div>
 
@@ -32,13 +31,13 @@ const Navbar = () => {
               <Link
                 key={link.name}
                 href={link.href}
-                className="text-gray-700 hover:text-blue-700 font-medium transition-colors"
+                className="text-gray-700 hover:text-brand-orange font-medium transition-colors"
               >
                 {link.name}
               </Link>
             ))}
-            <div className="flex items-center space-x-4 border-l pl-8">
-              <a href="tel:0277777728" className="flex items-center text-blue-700 font-bold">
+            <div className="flex items-center space-x-4 border-l pl-8 border-gray-200">
+              <a href="tel:0277777728" className="flex items-center text-brand-blue font-bold hover:text-brand-orange transition-colors">
                 <Phone className="w-4 h-4 mr-2" />
                 027 777 7728
               </a>
@@ -49,7 +48,7 @@ const Navbar = () => {
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-700 hover:text-blue-700"
+              className="text-gray-700 hover:text-brand-orange"
             >
               {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -65,7 +64,7 @@ const Navbar = () => {
               <Link
                 key={link.name}
                 href={link.href}
-                className="block px-3 py-2 text-gray-700 hover:text-blue-700 font-medium"
+                className="block px-3 py-2 text-gray-700 hover:text-brand-orange font-medium"
                 onClick={() => setIsOpen(false)}
               >
                 {link.name}
@@ -73,7 +72,7 @@ const Navbar = () => {
             ))}
             <a
               href="tel:0277777728"
-              className="block px-3 py-2 text-blue-700 font-bold flex items-center"
+              className="block px-3 py-2 text-brand-blue font-bold flex items-center"
             >
               <Phone className="w-4 h-4 mr-2" />
               027 777 7728

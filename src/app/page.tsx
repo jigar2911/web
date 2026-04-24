@@ -38,9 +38,9 @@ export default function Home() {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <section className="relative bg-blue-900 text-white py-24 lg:py-32 overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
-          <div className="absolute inset-0 bg-[url('/images/1.png')] bg-cover bg-center"></div>
+      <section className="relative bg-brand-blue text-white py-24 lg:py-32 overflow-hidden">
+        <div className="absolute inset-0 opacity-40">
+          <img src="/images/server-rack.webp" alt="Background" className="absolute inset-0 w-full h-full object-cover" />
         </div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl">
@@ -54,13 +54,13 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center px-8 py-4 border border-transparent text-lg font-bold rounded-md text-blue-900 bg-white hover:bg-blue-50 transition-colors"
+                className="inline-flex items-center justify-center px-8 py-4 border border-transparent text-lg font-bold rounded-md text-white bg-brand-orange hover:bg-orange-600 transition-colors"
               >
                 Request a Quote
               </Link>
               <Link
                 href="/services"
-                className="inline-flex items-center justify-center px-8 py-4 border-2 border-white text-lg font-bold rounded-md text-white hover:bg-white hover:text-blue-900 transition-all"
+                className="inline-flex items-center justify-center px-8 py-4 border-2 border-white text-lg font-bold rounded-md text-white hover:bg-white hover:text-brand-blue transition-all"
               >
                 Our Services
               </Link>
@@ -74,7 +74,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Comprehensive IT Solutions</h2>
-            <div className="w-20 h-1 bg-blue-600 mx-auto"></div>
+            <div className="w-20 h-1 bg-brand-orange mx-auto"></div>
             <p className="mt-4 text-xl text-gray-600 max-w-2xl mx-auto">
               We offer a wide range of IT services to ensure your technology is an asset, not a burden.
             </p>
@@ -86,12 +86,12 @@ export default function Home() {
                 key={index}
                 className="p-8 border border-gray-100 rounded-xl hover:shadow-xl transition-shadow bg-gray-50 group"
               >
-                <div className="w-14 h-14 bg-blue-100 rounded-lg flex items-center justify-center mb-6 group-hover:bg-blue-600 transition-colors">
-                  <service.icon className="w-8 h-8 text-blue-600 group-hover:text-white transition-colors" />
+                <div className="w-14 h-14 bg-blue-100 rounded-lg flex items-center justify-center mb-6 group-hover:bg-brand-blue transition-colors">
+                  <service.icon className="w-8 h-8 text-brand-blue group-hover:text-white transition-colors" />
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-3">{service.title}</h3>
                 <p className="text-gray-600 mb-6">{service.description}</p>
-                <Link href="/services" className="text-blue-600 font-bold flex items-center hover:translate-x-2 transition-transform">
+                <Link href="/services" className="text-brand-blue font-bold flex items-center hover:text-brand-orange transition-colors">
                   Learn More <ArrowRight className="ml-2 w-4 h-4" />
                 </Link>
               </div>
@@ -112,7 +112,7 @@ export default function Home() {
               />
             </div>
             <div className="lg:w-1/2">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Why Choose Oncall IT Support?</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 text-brand-blue">Why Choose Oncall IT Support?</h2>
               <p className="text-lg text-gray-600 mb-8">
                 Based in Christchurch, we understand the local business landscape. We don&apos;t just fix computers;
                 we partner with you to provide strategic IT outcomes.
@@ -126,7 +126,7 @@ export default function Home() {
                   "Expert team with deep industry knowledge",
                 ].map((item, i) => (
                   <li key={i} className="flex items-start">
-                    <CheckCircle2 className="w-6 h-6 text-green-500 mr-3 flex-shrink-0" />
+                    <CheckCircle2 className="w-6 h-6 text-brand-orange mr-3 flex-shrink-0" />
                     <span className="text-gray-700 font-medium">{item}</span>
                   </li>
                 ))}
@@ -137,7 +137,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-blue-700 text-white">
+      <section className="py-20 bg-brand-blue text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-5xl font-bold mb-6">Ready to Secure Your Business?</h2>
           <p className="text-xl text-blue-100 mb-10 max-w-2xl mx-auto">
@@ -145,7 +145,7 @@ export default function Home() {
           </p>
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center px-10 py-4 text-lg font-bold rounded-full text-blue-700 bg-white hover:bg-blue-50 transition-colors"
+            className="inline-flex items-center justify-center px-10 py-4 text-lg font-bold rounded-full text-white bg-brand-orange hover:bg-orange-600 transition-colors"
           >
             Get Started Now
           </Link>

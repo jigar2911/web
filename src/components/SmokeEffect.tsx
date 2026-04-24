@@ -16,13 +16,12 @@ const SmokeEffect: React.FC = () => {
 
     let particles: Particle[] = [];
     const colors = [
-      '#3b82f6', // Blue
-      '#ef4444', // Red
-      '#10b981', // Green
-      '#f59e0b', // Amber
-      '#8b5cf6', // Violet
-      '#ec4899', // Pink
-      '#06b6d4', // Cyan
+      'rgba(0, 74, 124, 0.5)',   // Brand Blue
+      'rgba(243, 112, 33, 0.5)',  // Brand Orange
+      'rgba(109, 110, 113, 0.5)', // Brand Grey
+      'rgba(6, 182, 212, 0.4)',   // Cyan
+      'rgba(139, 92, 246, 0.4)',  // Violet
+      'rgba(236, 72, 153, 0.4)',  // Pink
     ];
 
     class Particle {
@@ -34,32 +33,49 @@ const SmokeEffect: React.FC = () => {
       alpha: number;
       decay: number;
       expansion: number;
+      blur: number;
 
       constructor(x: number, y: number) {
         this.x = x;
         this.y = y;
-        this.size = Math.random() * 4 + 1;
+        // Start larger for a more billowy, smoke-like feel
+        this.size = Math.random() * 15 + 10;
         this.color = colors[Math.floor(Math.random() * colors.length)];
-        const angle = Math.random() * Math.PI * 2;
-        const speed = Math.random() * 2 + 0.5;
+
+        // Slower, more upward-tending velocity (mimicking smoke)
+        const angle = (Math.random() * Math.PI) + Math.PI; // Upward 180 degrees
+        const speed = Math.random() * 1.5 + 0.2;
         this.velocity = {
           x: Math.cos(angle) * speed,
-          y: Math.sin(angle) * speed
+          y: Math.sin(angle) * speed - 0.5 // Bias towards going up
         };
-        this.alpha = 0.7;
-        this.decay = Math.random() * 0.01 + 0.005;
-        this.expansion = Math.random() * 1.2 + 0.3;
+
+        this.alpha = 0.6;
+        this.decay = Math.random() * 0.005 + 0.003; // Slower decay
+        this.expansion = Math.random() * 1.5 + 1.0; // Expand more
+        this.blur = Math.random() * 20 + 10;
       }
 
       draw() {
         if (!ctx) return;
         ctx.save();
         ctx.globalAlpha = this.alpha;
+
+        // Create a soft, billowy puff using a radial gradient
+        const gradient = ctx.createRadialGradient(
+          this.x, this.y, 0,
+          this.x, this.y, this.size
+        );
+        gradient.addColorStop(0, this.color);
+        gradient.addColorStop(1, 'transparent');
+
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = this.color;
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = this.color;
+        ctx.fillStyle = gradient;
+
+        // Add significant blur for that "smoke" texture
+        ctx.filter = `blur(${this.blur}px)`;
+
         ctx.fill();
         ctx.restore();
       }
@@ -69,6 +85,9 @@ const SmokeEffect: React.FC = () => {
         this.y += this.velocity.y;
         this.alpha -= this.decay;
         this.size += this.expansion;
+        this.blur += 0.2; // Smoke gets blurrier as it expands
+
+        // Gentle air resistance
         this.velocity.x *= 0.99;
         this.velocity.y *= 0.99;
       }
@@ -82,10 +101,6 @@ const SmokeEffect: React.FC = () => {
     const handleMouseDown = (e: MouseEvent) => {
       isMouseDown.current = true;
       mousePos.current = { x: e.clientX, y: e.clientY };
-      // Initial burst
-      for (let i = 0; i < 15; i++) {
-        particles.push(new Particle(e.clientX, e.clientY));
-      }
     };
 
     const handleMouseUp = () => {
@@ -97,11 +112,12 @@ const SmokeEffect: React.FC = () => {
     };
 
     const animate = () => {
+      // Clear with a tiny bit of persistence for extra smoothness
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Continuous trail if mouse is down
       if (isMouseDown.current) {
-        for (let i = 0; i < 3; i++) {
+        // Emit more particles while holding for a thicker smoke trail
+        for (let i = 0; i < 2; i++) {
           particles.push(new Particle(mousePos.current.x, mousePos.current.y));
         }
       }
