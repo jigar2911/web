@@ -239,8 +239,11 @@ const FluidSimulation: React.FC = () => {
     // --- Simulation State ---
     let splats: { x: number, y: number, dx: number, dy: number, color: number[] }[] = [];
     let isMouseDown = false;
-    let lastMouseX = 0;
-    let lastMouseY = 0;
+    let shouldBurst = false;
+    let mouseX = 0;
+    let mouseY = 0;
+    let lastX = 0;
+    let lastY = 0;
     let colorCycle = 0;
 
     const hsvToRgb = (h: number, s: number, v: number) => {
@@ -272,8 +275,8 @@ const FluidSimulation: React.FC = () => {
       const rect = canvas.getBoundingClientRect();
       const posX = x / rect.width;
       const posY = 1.0 - y / rect.height;
-      const dx = (x - lastMouseX) * 10.0;
-      const dy = (lastMouseY - y) * 10.0;
+      const dx = (x - lastX) * 10.0;
+      const dy = (lastY - y) * 10.0;
       addSplat(posX, posY, dx, dy);
       if (isBurst) {
         for(let i=0; i<30; i++) {
@@ -282,26 +285,57 @@ const FluidSimulation: React.FC = () => {
             addSplat(posX + (Math.random()-0.5)*0.03, posY + (Math.random()-0.5)*0.03, Math.cos(angle)*force, Math.sin(angle)*force);
         }
       }
-      lastMouseX = x;
-      lastMouseY = y;
+      lastX = x;
+      lastY = y;
     };
 
     const handleMouseDown = (e: MouseEvent) => {
       isMouseDown = true;
-      lastMouseX = e.clientX;
-      lastMouseY = e.clientY;
-      handleInput(e.clientX, e.clientY, true);
+      shouldBurst = true;
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      lastX = e.clientX;
+      lastY = e.clientY;
     };
 
     const handleMouseUp = () => { isMouseDown = false; };
     const handleMouseMove = (e: MouseEvent) => {
-      if (isMouseDown) handleInput(e.clientX, e.clientY);
+      mouseX = e.clientX;
+      mouseY = e.clientY;
     };
+
+    const handleTouchStart = (e: TouchEvent) => {
+      if (e.targetTouches.length > 0) {
+        isMouseDown = true;
+        shouldBurst = true;
+        const touch = e.targetTouches[0];
+        mouseX = touch.clientX;
+        mouseY = touch.clientY;
+        lastX = touch.clientX;
+        lastY = touch.clientY;
+        if (e.cancelable) e.preventDefault();
+      }
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (e.targetTouches.length > 0) {
+        const touch = e.targetTouches[0];
+        mouseX = touch.clientX;
+        mouseY = touch.clientY;
+        if (e.cancelable) e.preventDefault();
+      }
+    };
+
+    const handleTouchEnd = () => { isMouseDown = false; };
 
     window.addEventListener('mousedown', handleMouseDown);
     window.addEventListener('mouseup', handleMouseUp);
     window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('touchstart', handleTouchStart);
+    window.addEventListener('touchmove', handleTouchMove);
+    window.addEventListener('touchend', handleTouchEnd);
 
+    let animationId: number;
     const update = () => {
       if (!canvas || !gl) return;
 
@@ -310,6 +344,16 @@ const FluidSimulation: React.FC = () => {
       if (canvas.width !== width || canvas.height !== height) {
         canvas.width = width;
         canvas.height = height;
+      }
+
+      // If mouse is held down, provide a continuous splat
+      if (isMouseDown) {
+        handleInput(mouseX, mouseY, shouldBurst);
+        shouldBurst = false;
+      } else {
+        // Sync lastX/lastY even when not clicking so there's no jump on click
+        lastX = mouseX;
+        lastY = mouseY;
       }
 
       gl.viewport(0, 0, simRes, simRes);
@@ -413,7 +457,7 @@ const FluidSimulation: React.FC = () => {
       gl.bindTexture(gl.TEXTURE_2D, density.read.texture);
       blit(null);
 
-      requestAnimationFrame(update);
+      animationId = requestAnimationFrame(update);
     };
 
     update();
@@ -422,6 +466,10 @@ const FluidSimulation: React.FC = () => {
       window.removeEventListener('mousedown', handleMouseDown);
       window.removeEventListener('mouseup', handleMouseUp);
       window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('touchend', handleTouchEnd);
+      cancelAnimationFrame(animationId);
     };
   }, []);
 
