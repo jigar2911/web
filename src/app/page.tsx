@@ -46,7 +46,8 @@ export default function Home() {
             alt="Data Center"
             className="w-full h-full object-cover scale-105 animate-subtle-zoom"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-brand-blue via-brand-blue/80 to-transparent"></div>
+          <div className="absolute inset-0 bg-brand-blue/40"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-brand-blue via-brand-blue/60 to-transparent"></div>
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
@@ -60,13 +61,21 @@ export default function Home() {
             </div>
 
             <h1 className="text-5xl md:text-7xl font-display font-extrabold tracking-tight mb-8 leading-tight">
-              Next-Gen <span className="text-brand-orange">IT Support</span> for Local Business
+              <span className="bg-brand-blue px-4 py-1 inline-block mb-2">Next-Gen IT Support</span><br />
+              <span className="bg-brand-blue px-4 py-1 inline-block">for Local Business</span>
             </h1>
 
-            <p className="text-xl md:text-2xl text-blue-100/90 mb-12 leading-relaxed max-w-2xl font-sans">
-              Proactive, secure, and infinitely scalable technology solutions
-              crafted to empower your growth in a digital-first world.
-            </p>
+            <div className="space-y-2 mb-12">
+              <p className="text-xl md:text-2xl text-white leading-relaxed max-w-2xl font-sans">
+                <span className="bg-brand-blue px-2 py-1 inline-block">Proactive, secure, and infinitely scalable technology</span>
+              </p>
+              <p className="text-xl md:text-2xl text-white leading-relaxed max-w-2xl font-sans">
+                <span className="bg-brand-blue px-2 py-1 inline-block">solutions crafted to empower your growth in a digital-first</span>
+              </p>
+              <p className="text-xl md:text-2xl text-white leading-relaxed max-w-2xl font-sans">
+                <span className="bg-brand-blue px-2 py-1 inline-block">world.</span>
+              </p>
+            </div>
 
             <div className="flex flex-col sm:flex-row gap-6">
               <Link

@@ -3,7 +3,7 @@ import { Inter, Montserrat } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import FluidSimulation from "@/components/FluidSimulation";
+import BubbleEffect from "@/components/BubbleEffect";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -39,7 +39,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${montserrat.variable} antialiased min-h-screen flex flex-col font-sans`}
       >
-        <FluidSimulation />
+        <BubbleEffect />
         <Navbar />
         <main className="flex-grow">
           {children}
