@@ -43,7 +43,7 @@ export default function Home() {
         <div className="absolute inset-0 z-0">
           <img
             src="/images/server-rack.webp"
-            alt="Data Center"
+            alt="Oncall IT Support Logo"
             className="w-full h-full object-cover scale-105 animate-subtle-zoom"
           />
           <div className="absolute inset-0 bg-brand-blue/40"></div>
